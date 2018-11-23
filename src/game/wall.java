@@ -16,12 +16,12 @@ import javafx.scene.shape.Rectangle;
  */
 public class wall extends Component implements Serializable
 {
-    wall(int i)
+    wall(int c)
     {
         Random rand=new Random();
         Rectangle w=new Rectangle(0,0,4,100);
         this.rx=rand.nextInt(4)*120+20;
-    	this.ry=(rand.nextInt(2000)*(-1)*(i+1))-100;
+    	this.ry=(300*(-1)*(c+1)+70);
         w.setFill(Color.WHITE);
         this.getChildren().add(w);
         this.setTranslateX(rx);

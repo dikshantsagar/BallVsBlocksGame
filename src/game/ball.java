@@ -31,17 +31,24 @@ public class ball extends Component implements Serializable
         this.setScaleY(0);
     }
     
-    ball(int i)
+    ball(int c)
     {
         Random rand=new Random();
         this.rx=rand.nextInt(480)+20;
-        this.ry=(rand.nextInt(2000)*(-1)*(i+1))-100;
+        this.ry=(305*(-1)*(c+1));
     Circle base=new Circle(1,1,10,Color.YELLOW);
      this.num=rand.nextInt(4)+1;
     Text text =new Text(Integer.toString(num));
     this.getChildren().addAll(base,text);
-    this.setTranslateX(rx);
-    this.setTranslateY(ry);
+    this.setLayoutX(rx);
+     if(ry<0)
+        {
+            this.setLayoutY(ry);
+        }
+        else
+        {
+            this.setLayoutY(-3000);
+        }
     
      }
     

@@ -6,6 +6,7 @@
 package game;
 
 import java.io.Serializable;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -26,6 +27,17 @@ public class LeaderBoard extends AnchorPane implements Serializable
         head.setLayoutY(100);
         this.getChildren().add(head);
         
+        Text dum=new Text("1. Name   ------ Score");
+        dum.setLayoutX(150);
+        dum.setLayoutY(200);
+        dum.setScaleX(2);
+        dum.setScaleY(2);
+        dum.setFill(Color.WHITE);
+        this.getChildren().add(dum);
+        
+        
+        Button b=new Button("<-Back");
+        this.getChildren().add(b);
         
         
     }

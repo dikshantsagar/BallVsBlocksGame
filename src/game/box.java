@@ -36,13 +36,13 @@ public class box extends Component implements Serializable
         this.setScaleY(0);
     }
     
-   box(int i)
+   box(int c)
    {
         Random rand=new Random();
     	 	
     	blocknum=rand.nextInt(15)+1;
     	this.rx=rand.nextInt(4)*120+35;
-    	this.ry=(rand.nextInt(2000)*(-1)*(i+1))-100;
+    	this.ry=(300*(-1)*(c+1));
 
     	 	
     	Rectangle b=new Rectangle(rx,ry,100,100);
@@ -71,7 +71,15 @@ public class box extends Component implements Serializable
         
         this.getChildren().addAll(b,t);
         this.setTranslateX(rx);
-        this.setTranslateY(ry);
+        if(ry<0)
+        {
+            this.setTranslateY(ry);
+        }
+        else
+        {
+            this.setTranslateY(-3000);
+        }
+        
     
    }
 }

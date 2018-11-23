@@ -9,6 +9,8 @@ import java.awt.Color;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -33,7 +35,7 @@ import javafx.stage.Stage;
  */
 public class Game extends Application implements Serializable{
     
-    
+    public Scene scene;
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException {
         
@@ -67,7 +69,7 @@ public class Game extends Application implements Serializable{
         btn2.setLayoutY(420);
         root.getChildren().addAll(n,h,btn1,btn2,imageView);
         root.setId("pane");
-        Scene scene = new Scene(root,520,700);
+        scene = new Scene(root,520,700);
         scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
         primaryStage.setTitle("SNAKE V/S BLOCKS");
         primaryStage.setScene(scene);
@@ -81,7 +83,12 @@ public class Game extends Application implements Serializable{
             @Override
             public void handle(MouseEvent e)
             {
-               AnchorPane game=new gameplay();
+               AnchorPane game = null;
+                try {
+                    game = new gameplay();
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                }
                game.setId("gpane");
                scene.setRoot(game);
                
