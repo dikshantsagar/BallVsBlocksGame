@@ -32,6 +32,13 @@ public class shield extends Component implements Serializable
         //base.setScaleY(0.2);
         this.getChildren().add(base);
         this.setTranslateX(rx);
-        this.setTranslateY(ry);
+        if(ry<0)
+        {
+            this.setTranslateY(ry);
+        }
+        else
+        {
+            this.setTranslateY(-3000);
+        }
     }
 }

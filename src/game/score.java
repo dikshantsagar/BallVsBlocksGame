@@ -22,6 +22,11 @@ public class score extends Text implements Serializable{
         this.setText(Integer.toString(score));
     }
     
+    public int getscore()
+    {
+        return this.score;
+    }
+    
     score()
     {
         this.score=0;
@@ -31,6 +36,26 @@ public class score extends Text implements Serializable{
         this.setScaleY(2);
         this.setLayoutX(490);
         this.setLayoutY(20);
+    }
+    score(int x)
+    {
+        this.score=x;
+        this.setText(Integer.toString(score));
+        this.setFill(Color.WHITE);
+        this.setScaleX(2);
+        this.setScaleY(2);
+        this.setLayoutX(490);
+        this.setLayoutY(20);
+    }
+    score(int x,int xc,int yc,int s)
+    {
+        this.score=x;
+        this.setText(Integer.toString(score));
+        this.setFill(Color.WHITE);
+        this.setScaleX(s);
+        this.setScaleY(s);
+        this.setLayoutX(xc);
+        this.setLayoutY(yc);
     }
     
 }

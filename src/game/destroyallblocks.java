@@ -30,7 +30,15 @@ public class destroyallblocks extends Component implements Serializable
         base.setScaleX(0.2);
         base.setScaleY(0.2);
         this.getChildren().add(base);
-        this.setLayoutX(rx);
-        this.setLayoutY(ry);
+        this.setTranslateX(rx);
+        if(ry<0)
+        {
+            this.setTranslateY(ry);
+        }
+        else
+        {
+            this.setTranslateY(-3000);
+        }
+    
     }
 }

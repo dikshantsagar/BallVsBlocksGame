@@ -43,11 +43,11 @@ public class ball extends Component implements Serializable
     this.setLayoutX(rx);
      if(ry<0)
         {
-            this.setLayoutY(ry);
+            this.setTranslateY(ry);
         }
         else
         {
-            this.setLayoutY(-3000);
+            this.setTranslateY(-3000);
         }
     
      }

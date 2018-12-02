@@ -21,6 +21,12 @@ import javafx.scene.shape.Circle;
 public class magnet extends Component implements Serializable
 {
     
+    protected void destroy()
+    {
+        
+        this.setScaleX(0);
+        this.setScaleY(0);
+    }
     magnet(int i) throws FileNotFoundException
     {
         Random rand=new Random();
@@ -28,10 +34,18 @@ public class magnet extends Component implements Serializable
         this.ry=(rand.nextInt(2000)*(-1)*(i+1)*2);
         Image image = new Image(new FileInputStream("./src/game/mag.png"));
         ImageView base = new ImageView(image);
-        base.setScaleX(0.2);
-        base.setScaleY(0.2);
+        base.setScaleX(0.1);
+        base.setScaleY(0.1);
         this.getChildren().add(base);
-        this.setLayoutX(rx);
-        this.setLayoutY(ry);
+        this.setTranslateX(rx);
+        if(ry<0)
+        {
+            this.setTranslateY(ry);
+        }
+        else
+        {
+            this.setTranslateY(-3000);
+        }
+    
     }
 }

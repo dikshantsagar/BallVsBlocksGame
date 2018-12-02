@@ -5,8 +5,18 @@
  */
 package game;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -17,27 +27,56 @@ import javafx.scene.text.Text;
  */
 public class LeaderBoard extends AnchorPane implements Serializable
 {
-    LeaderBoard()
+    LeaderBoard() throws FileNotFoundException, IOException, ClassNotFoundException
     {
-        Text head=new Text("-- Leader Board --");
-        head.setFill(Color.WHITE);
-        head.setScaleX(3);
-        head.setScaleY(3);
-        head.setLayoutX(200);
+        Button head=new Button("Leader Board");
+        head.setStyle("-fx-font: 30 arial; -fx-base: #ee2211;");
+        head.setLayoutX(130);
         head.setLayoutY(100);
         this.getChildren().add(head);
+        FileInputStream r=new FileInputStream("scores.txt");
+        ObjectInputStream in=new ObjectInputStream(r);
+        ArrayList<Integer> scores=(ArrayList<Integer>)in.readObject();
+        r.close();
+        ArrayList<Text> pr=new ArrayList<Text>(10);
+        System.out.println(scores.get(0));
+        for(int i=0;i<10;i++)
+        {
+            pr.add(new score());
+        }
         
-        Text dum=new Text("1. Name   ------ Score");
-        dum.setLayoutX(150);
-        dum.setLayoutY(200);
-        dum.setScaleX(2);
-        dum.setScaleY(2);
-        dum.setFill(Color.WHITE);
-        this.getChildren().add(dum);
+        for(int i=0;i<10;i++)
+        {
+            pr.get(i).setText(i+".  ----------------->  "+Integer.toString(scores.get(i)));
+            pr.get(i).setLayoutX(170);
+            pr.get(i).setLayoutY(220+i*30);
+            this.getChildren().add(pr.get(i));
+        }
         
         
-        Button b=new Button("<-Back");
+        
+        Button b=new Button("<");
+        b.setStyle("-fx-font: 30 arial; -fx-base: #ee2211;");
         this.getChildren().add(b);
+        
+        b.addEventHandler(MouseEvent.MOUSE_CLICKED,new EventHandler<MouseEvent>()
+        {
+            @Override
+            public void handle(MouseEvent e)
+            {
+               AnchorPane lead;
+                try {
+                    lead = new Home();
+                    lead.setId("lpane");
+                    Scene scene=getScene();
+                    scene.setRoot(lead);
+                } catch (IOException ex) {
+                    Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                }
+               
+               
+            }
+        });
         
         
     }

@@ -23,6 +23,7 @@ public class box extends Component implements Serializable
 
     
     protected int blocknum;
+    protected Rectangle b;
     
     public int getnum()
     {
@@ -32,8 +33,9 @@ public class box extends Component implements Serializable
     protected void destroy()
     {
         this.blocknum=0;
-        this.setScaleX(0);
-        this.setScaleY(0);
+        this.b.setScaleX(0);
+        this.b.setScaleY(0);
+        
     }
     
    box(int c)
@@ -45,7 +47,7 @@ public class box extends Component implements Serializable
     	this.ry=(300*(-1)*(c+1));
 
     	 	
-    	Rectangle b=new Rectangle(rx,ry,100,100);
+    	 this.b=new Rectangle(rx,ry,100,100);
 	
         int sw=blocknum%4;
         switch(sw)

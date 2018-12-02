@@ -19,7 +19,7 @@
             <Image url="@logo.png" />
          </image>
       </ImageView>
-      <Button id="tryagain" contentDisplay="CENTER" layoutX="166.0" layoutY="463.0" mnemonicParsing="false"  style="-fx-background-color: red;" text="TRY AGAIN" textFill="WHITE">
+      <Button id="tryagain" contentDisplay="CENTER" layoutX="166.0" layoutY="463.0" mnemonicParsing="false" onMouseClicked="#a" style="-fx-background-color: red;" text="TRY AGAIN" textFill="WHITE">
          <font>
             <Font size="31.0" />
          </font>

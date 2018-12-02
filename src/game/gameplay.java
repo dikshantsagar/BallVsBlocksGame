@@ -22,6 +22,7 @@ import javafx.animation.TranslateTransition;
 import javafx.animation.TranslateTransitionBuilder;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
@@ -32,6 +33,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import static javafx.scene.paint.Color.BLACK;
+import static javafx.scene.paint.Color.RED;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -51,29 +53,31 @@ public class gameplay extends AnchorPane implements Serializable {
     ArrayList<wall> walls=new ArrayList<wall>();
     ArrayList<magnet> mags=new ArrayList<magnet>();
     ArrayList<destroyallblocks> bombs=new ArrayList<destroyallblocks>();
+    ArrayList<shield> sh=new ArrayList<shield>();
+    
+    ArrayList<TranslateTransition> boxan = new ArrayList<TranslateTransition>(); 
+            ArrayList<TranslateTransition> ballan = new ArrayList<TranslateTransition>();
+            ArrayList<TranslateTransition> wallan = new ArrayList<TranslateTransition>();
+            ArrayList<TranslateTransition> mag = new ArrayList<TranslateTransition>();
+            ArrayList<TranslateTransition> bomb = new ArrayList<TranslateTransition>();
+            ArrayList<TranslateTransition> sha = new ArrayList<TranslateTransition>();
    
     int c=0;
-    public void stopall() throws IOException
+    public void stopall() throws IOException, FileNotFoundException, ClassNotFoundException
     {
        
-        Parent root=(Parent)FXMLLoader.load(getClass().getResource("gameover.fxml"));
-        Scene over=new Scene(root,520,700);
-        over.setFill(BLACK);
-        Stage stage=(Stage)getScene().getWindow();
-        stage.setScene(over);
-        
-    
+        gameover root=new gameover(this.score.getscore());
+        Scene scene=getScene();
+        root.setId("fpane");
+        scene.setRoot(root);
+        scene.setFill(RED);
         
     }
+
     
-    public void a()
+    private Snake getplayer(int l)
     {
-        this.c=1;
-    }
-    
-    private Snake getplayer()
-    {
-        Snake player=new Snake();
+        Snake player=new Snake(l);
         player.setCursor(Cursor.HAND);
     	     player.setOnMouseDragged(new EventHandler<MouseEvent>() {
     	            public void handle(MouseEvent me) {
@@ -84,13 +88,48 @@ public class gameplay extends AnchorPane implements Serializable {
                         if(newXPosition >10 && newXPosition <510)
     	                player.setLayoutX(newXPosition-300);
                         
+                        for(int i=0;i<10;i++)
+                        {
+                            
+                        
+                            if(player.getBoundsInParent().intersects(mags.get(i).getBoundsInParent()))
+                                {
+                                    System.out.println("mag");
+                                    mags.get(i).destroy();
+                                }
+                            if(player.getBoundsInParent().intersects(sh.get(i).getBoundsInParent()))
+                                {
+                                    System.out.println("shield");
+                                    sh.get(i).destroy();
+                                    new Thread(new Runnable()
+                                    {
+                                        @Override
+                                        public void run()
+                                        {
+                                            player.setshield();
+
+                                            try {
+                                                Thread.sleep(5000);
+                                            } catch (InterruptedException ex) {
+                                                Logger.getLogger(gameplay.class.getName()).log(Level.SEVERE, null, ex);
+                                            }
+
+                                            player.removeshield();
+                                        }
+                                    }).start();
+                                    player.setshield();
+                                }
+                            if(player.getBoundsInParent().intersects(bombs.get(i).getBoundsInParent()))
+                                {
+                                    System.out.println("bomb");
+                                    bombs.get(i).destroy();
+                                }
+                        }
                         for(int i=0;i<100;i++)
                         {
                             
-                            
-                                
-                            
-                            if(player.getBoundsInParent().intersects(balls.get(i).getBoundsInParent())){
+                            if(player.getBoundsInParent().intersects(balls.get(i).getBoundsInParent()))
+                            {
                                 
                                 System.out.println("crashhh!!!");
                                 player.addlen(balls.get(i).getnum());
@@ -109,12 +148,19 @@ public class gameplay extends AnchorPane implements Serializable {
                                     
                                     System.out.println("boxed!");
                                 }
-                                else
+                                else if(player.shieldalive()==true)
+                                {
+                                    boxes.get(i).destroy();
+                                }
+                                else if(c==0)
                                 {
                                     
                                     try {
                                         stopall();
+                                        c=1;
                                     } catch (IOException ex) {
+                                        Logger.getLogger(gameplay.class.getName()).log(Level.SEVERE, null, ex);
+                                    } catch (ClassNotFoundException ex) {
                                         Logger.getLogger(gameplay.class.getName()).log(Level.SEVERE, null, ex);
                                     }
                                 }
@@ -122,7 +168,6 @@ public class gameplay extends AnchorPane implements Serializable {
                             }
                             
                         }
-                        
     	            }
     	               
     	        });
@@ -134,23 +179,42 @@ public class gameplay extends AnchorPane implements Serializable {
                         player.setCursor(Cursor.CLOSED_HAND);
     	            }
     	        });
+             
+             
         
         return player;
     }
 
-    gameplay() throws FileNotFoundException
+    gameplay(int sc,int l) throws FileNotFoundException
     {   
-        this.player=getplayer();
-        this.score=new score();
-        this.getChildren().addAll(player,score);
+        this.player=getplayer(l);
+        this.score=new score(sc);
+        Button btn1=new Button("| |");
+        btn1.setStyle("-fx-font: 30 arial; -fx-base: #ee2211;");
+        btn1.setLayoutX(20);
+        btn1.setLayoutY(20);
+        this.getChildren().addAll(player,score,btn1);
+         btn1.addEventHandler(MouseEvent.MOUSE_CLICKED,new EventHandler<MouseEvent>()
+        {
+            @Override
+            public void handle(MouseEvent e)
+            {
+               
+                try {
+                    AnchorPane pause=new pausescreen(score.getscore(),player.getlen());
+                    Scene scene =getScene();
+                    scene.setRoot(pause);
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(gameplay.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                    
+               
+            }
+        });
         
         
             
-            ArrayList<TranslateTransition> boxan = new ArrayList<TranslateTransition>(); 
-            ArrayList<TranslateTransition> ballan = new ArrayList<TranslateTransition>();
-            ArrayList<TranslateTransition> wallan = new ArrayList<TranslateTransition>();
-            ArrayList<TranslateTransition> mag = new ArrayList<TranslateTransition>();
-            ArrayList<TranslateTransition> bomb = new ArrayList<TranslateTransition>();
+            
             
             
             
@@ -170,7 +234,7 @@ public class gameplay extends AnchorPane implements Serializable {
                     
                     this.getChildren().addAll(boxes.get(i),balls.get(i),walls.get(i));
                     System.out.println(balls.get(i).gety()/2000);
-                    boxan.add(new TranslateTransition(Duration.seconds((boxes.get(i).gety()/2000)*-11),boxes.get(i)));
+                    boxan.add(new TranslateTransition(Duration.seconds((boxes.get(i).gety()/2000)*-12),boxes.get(i)));
                     
                     boxan.get(i).setFromY(boxes.get(i).ry);
                     boxan.get(i).setToY(boxes.get(i).gety()*-1+1000);
@@ -180,7 +244,7 @@ public class gameplay extends AnchorPane implements Serializable {
                     
                     
 
-                    ballan.add(new TranslateTransition(Duration.seconds((balls.get(i).gety()/2000)*-11),balls.get(i)));
+                    ballan.add(new TranslateTransition(Duration.seconds((balls.get(i).gety()/2000)*-12),balls.get(i)));
                     ballan.get(i).setFromY(balls.get(i).ry);
                     ballan.get(i).setToY(balls.get(i).gety()*-1+1000);
                     ballan.get(i).setCycleCount(1);
@@ -188,7 +252,7 @@ public class gameplay extends AnchorPane implements Serializable {
                     //balls.get(i).destroy();
 
 
-                    wallan.add(new TranslateTransition(Duration.seconds((walls.get(i).gety()/2000)*-11),walls.get(i)));
+                    wallan.add(new TranslateTransition(Duration.seconds((walls.get(i).gety()/2000)*-12),walls.get(i)));
                     wallan.get(i).setFromY(walls.get(i).ry);
                     wallan.get(i).setToY(walls.get(i).gety()*-1+1000);
                     wallan.get(i).setCycleCount(1);
@@ -207,7 +271,7 @@ public class gameplay extends AnchorPane implements Serializable {
                 {
                     mags.add(new magnet(i));
                     this.getChildren().add(mags.get(i));
-                    mag.add(new TranslateTransition(Duration.seconds((mags.get(i).gety()/2000)*-11),mags.get(i)));
+                    mag.add(new TranslateTransition(Duration.seconds((mags.get(i).gety()/2000)*-12),mags.get(i)));
                     mag.get(i).setFromY(mags.get(i).ry);
                     mag.get(i).setToY(mags.get(i).gety()*-1+1000);
                     mag.get(i).setCycleCount(1);
@@ -216,14 +280,22 @@ public class gameplay extends AnchorPane implements Serializable {
                     
                     bombs.add(new destroyallblocks(i));
                     this.getChildren().add(bombs.get(i));
-                    mag.add(new TranslateTransition(Duration.seconds((bombs.get(i).gety()/2000)*-11),bombs.get(i)));
-                    mag.get(i).setFromY(bombs.get(i).ry);
-                    mag.get(i).setToY(bombs.get(i).gety()*-1+1000);
-                    mag.get(i).setCycleCount(1);
-                    mag.get(i).play();
+                    bomb.add(new TranslateTransition(Duration.seconds((bombs.get(i).gety()/2000)*-12),bombs.get(i)));
+                    bomb.get(i).setFromY(bombs.get(i).ry);
+                    bomb.get(i).setToY(bombs.get(i).gety()*-1+1000);
+                    bomb.get(i).setCycleCount(1);
+                    bomb.get(i).play();
                     
+                    sh.add(new shield(i));
+                    this.getChildren().add(sh.get(i));
+                    sha.add(new TranslateTransition(Duration.seconds((sh.get(i).gety()/2000)*-12),sh.get(i)));
+                    sha.get(i).setFromY(sh.get(i).ry);
+                    sha.get(i).setToY(sh.get(i).gety()*-1+1000);
+                    sha.get(i).setCycleCount(1);
+                    sha.get(i).play();
                 }
-            
+                
+              
             
             
             

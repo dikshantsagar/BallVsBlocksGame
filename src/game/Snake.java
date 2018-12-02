@@ -23,11 +23,23 @@ import javafx.scene.text.Text;
  */
 public class Snake extends Group implements Serializable
 {
-    private int len=4;
+    private int len;
     private double sx=300;
     private double sy=500;
     private double ey;
-    
+    boolean shield=false;
+    boolean shieldalive()
+    {
+        return shield;
+    }
+    void setshield()
+    {
+        this.shield=true;
+    }
+    void removeshield()
+    {
+        this.shield=false;
+    }
     
     public void addlen(int x)
     {
@@ -67,9 +79,9 @@ public class Snake extends Group implements Serializable
     {
         return this.len;
     }
-    Snake()
+    Snake(int le)
     {   
-        
+        this.len=le;
         Text l=new Text(Integer.toString(len));
         l.setFill(WHITE);
         l.setLayoutX(sx-5);
