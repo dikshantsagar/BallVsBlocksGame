@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package game;
 
 import java.io.FileInputStream;
@@ -16,19 +12,27 @@ import javafx.scene.shape.Circle;
 
 /**
  *
- * @author dikshant
+ *@author dikshant sagar, mukul kumar
+ * @version Snake Vs Block Game AP Project
+ * destroyallblocks class. 
+ * Destroys all the blocks present on the screen at a given time.
  */
 public class destroyallblocks extends Component implements Serializable
+
+
+/**
+ *  Destroys all blocks
+ *  @param  i       i is a dummy ineteger to decide the position and after how much time a destroyblock component will occur
+ */
 {
     destroyallblocks(int i) throws FileNotFoundException
     {
          Random rand=new Random();
         this.rx=rand.nextInt(4)*120+35;
-        this.ry=(rand.nextInt(2000)*(-1)*(i+1)*4);
+        this.ry=(rand.nextInt(2000)*(-1)*(i+1)*4)-1000;
+        //this.ry=rand.nextInt(3000);
         Image image = new Image(new FileInputStream("./src/game/bomb.png"));
         ImageView base = new ImageView(image);
-        base.setScaleX(0.2);
-        base.setScaleY(0.2);
         this.getChildren().add(base);
         this.setTranslateX(rx);
         if(ry<0)

@@ -16,30 +16,57 @@ import javafx.scene.text.Text;
 
 /**
  *
- * @author dikshant
+ * @author dikshant sagar, mukul kumar
+ * @version Snake Vs Block Game AP Project
+ * 
+ * Box class
+ * The snake will encounter blocks of different values and destroy them
+ * if it has enough length (length less than value)
  */
 public class box extends Component implements Serializable
 {
 
+	/** Box class
+	 * block number
+	 * Rectangle object
+	            */
     
     protected int blocknum;
     protected Rectangle b;
-    
-    public int getnum()
+    protected Text t;
+
+	/**
+	 * get the block number
+     * @return 
+	 */
+    protected int getnum()
     {
         return this.blocknum;
     }
     
+
+	/**
+	 * DEstroy the block
+	 */
     protected void destroy()
     {
         this.blocknum=0;
         this.b.setScaleX(0);
         this.b.setScaleY(0);
+        this.t.setScaleX(0);
+        this.t.setScaleY(0);
         
     }
     
+    /**
+	    * Generation of random blocks of random values and random colours from the four given colours {LIme, red, aqua, orange}
+	   	* @param c      parameter int value to set the position of ball on the screen
+
+	    * <p> int sw to decide the colour of the block randomly  </p>
+	    */
    box(int c)
    {
+	   
         Random rand=new Random();
     	 	
     	blocknum=rand.nextInt(15)+1;
@@ -67,7 +94,7 @@ public class box extends Component implements Serializable
         b.setArcHeight(20);
         b.setArcWidth(20);
 
-        Text t=new Text(Integer.toString(blocknum));
+        t=new Text(Integer.toString(blocknum));
         t.setScaleX(3);
         t.setScaleY(3);
         

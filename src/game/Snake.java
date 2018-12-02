@@ -19,29 +19,40 @@ import javafx.scene.text.Text;
 
 /**
  *
- * @author dikshant
+  *@author dikshant sagar, mukul kumar
+ * @version Snake Vs Block Game AP Project
+ * Snake class
+ * Snake adds balls to it and its length increases.
  */
 public class Snake extends Group implements Serializable
 {
+	/** Gives length, position coordinates of snake and the status of shield*/
     private int len;
     private double sx=300;
     private double sy=500;
     private double ey;
     boolean shield=false;
-    boolean shieldalive()
+    protected Color co;
+    
+    /** making shield active*/
+    protected boolean shieldalive()
     {
         return shield;
     }
-    void setshield()
+    /** set shield on the screen */
+    protected void setshield()
     {
         this.shield=true;
     }
-    void removeshield()
+    
+    /** remove shield from the screen*/
+    protected void removeshield()
     {
         this.shield=false;
     }
-    
-    public void addlen(int x)
+   /** Add balls to snake
+    * @param x   value of ball*/
+    protected void addlen(int x)
     {
         
         this.len+=x;
@@ -52,12 +63,14 @@ public class Snake extends Group implements Serializable
         this.getChildren().set(0, t);
         for(int i=0;i<x;i++)
         {
-            this.getChildren().add(new Circle(sx,ey,10,Color.YELLOW));
+            this.getChildren().add(new Circle(sx,ey,10,this.co));
             this.ey=ey+20;
         }
     }
     
-    public void declen(int x)
+    /** decrease the length of the snake according to the the value of block
+     * @param x      value of the block */
+    protected void declen(int x)
     {
         if(this.len-x>1)
         {
@@ -75,12 +88,20 @@ public class Snake extends Group implements Serializable
         }
         
     }
-    public int getlen()
+    
+    /** function to get the length of snak
+     * @return e*/
+    
+    protected int getlen()
     {
         return this.len;
     }
-    Snake(int le)
+    
+    /** Snake contructor
+     * @param le        initial length of the snake*/
+    Snake(int le,Color co)
     {   
+        this.co=co;
         this.len=le;
         Text l=new Text(Integer.toString(len));
         l.setFill(WHITE);
@@ -89,7 +110,7 @@ public class Snake extends Group implements Serializable
         this.getChildren().add(l);
         for(int i=0;i<this.len;i++)
         {
-            this.getChildren().add(new Circle(sx,sy+i*20,10,Color.YELLOW));
+            this.getChildren().add(new Circle(sx,sy+i*20,10,co));
             this.ey=sy+(i+1)*20;
             
         }

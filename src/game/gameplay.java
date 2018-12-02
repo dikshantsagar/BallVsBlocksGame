@@ -5,7 +5,7 @@
  */
 package game;
 
-import java.awt.Color;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
@@ -32,6 +32,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import static javafx.scene.paint.Color.BLACK;
 import static javafx.scene.paint.Color.RED;
 import javafx.scene.text.Text;
@@ -40,46 +41,65 @@ import javafx.util.Duration;
 
 /**
  *
- * @author dikshant
+  *@author dikshant sagar, mukul kumar
+ * @version Snake Vs Block Game AP Project
+ * 
+ * gameplay class
+ * The main gameplay where all the activities occur.
+ * The game will run on this class. This class embeds all the GUI components and the score and the pause exit menu.
  */
 public class gameplay extends AnchorPane implements Serializable {
     
+	/** arraylist of boxes
+	 * arraylist of balls
+	 * arraylist of wall
+	 * arraylist of magnet
+	 * arraylist of destroyblock
+	 * arraylist of shield
+	 * */
     
     private double initX;
     private Snake player;
     private score score;
-    ArrayList<box> boxes=new ArrayList<box>();
-    ArrayList<ball> balls=new ArrayList<ball>();
-    ArrayList<wall> walls=new ArrayList<wall>();
-    ArrayList<magnet> mags=new ArrayList<magnet>();
-    ArrayList<destroyallblocks> bombs=new ArrayList<destroyallblocks>();
-    ArrayList<shield> sh=new ArrayList<shield>();
+    protected Color co;
+    protected ArrayList<box> boxes=new ArrayList<box>();
+    protected ArrayList<ball> balls=new ArrayList<ball>();
+    protected ArrayList<wall> walls=new ArrayList<wall>();
+    protected ArrayList<magnet> mags=new ArrayList<magnet>();
+    protected ArrayList<destroyallblocks> bombs=new ArrayList<destroyallblocks>();
+    protected ArrayList<shield> sh=new ArrayList<shield>();
     
-    ArrayList<TranslateTransition> boxan = new ArrayList<TranslateTransition>(); 
-            ArrayList<TranslateTransition> ballan = new ArrayList<TranslateTransition>();
-            ArrayList<TranslateTransition> wallan = new ArrayList<TranslateTransition>();
-            ArrayList<TranslateTransition> mag = new ArrayList<TranslateTransition>();
-            ArrayList<TranslateTransition> bomb = new ArrayList<TranslateTransition>();
-            ArrayList<TranslateTransition> sha = new ArrayList<TranslateTransition>();
+    protected ArrayList<TranslateTransition> boxan = new ArrayList<TranslateTransition>(); 
+    protected   ArrayList<TranslateTransition> ballan = new ArrayList<TranslateTransition>();
+    protected   ArrayList<TranslateTransition> wallan = new ArrayList<TranslateTransition>();
+    protected   ArrayList<TranslateTransition> mag = new ArrayList<TranslateTransition>();
+    protected   ArrayList<TranslateTransition> bomb = new ArrayList<TranslateTransition>();
+    protected   ArrayList<TranslateTransition> sha = new ArrayList<TranslateTransition>();
    
-    int c=0;
-    public void stopall() throws IOException, FileNotFoundException, ClassNotFoundException
+    
+    
+    /** Gameover function
+     * @throws java.io.IOException
+     * @throws java.io.FileNotFoundException
+     * @throws java.lang.ClassNotFoundException*/
+    protected void stopall() throws IOException, FileNotFoundException, ClassNotFoundException
     {
        
-        gameover root=new gameover(this.score.getscore());
+        gameover root=new gameover(this.score.getscore(),co);
         Scene scene=getScene();
         root.setId("fpane");
         scene.setRoot(root);
         scene.setFill(RED);
         
     }
-
+/**  get the playyer's infomation*/
     
-    private Snake getplayer(int l)
+    private Snake getplayer(int l,Color co)
     {
-        Snake player=new Snake(l);
+        Snake player=new Snake(l,co);
         player.setCursor(Cursor.HAND);
     	     player.setOnMouseDragged(new EventHandler<MouseEvent>() {
+                        @Override
     	            public void handle(MouseEvent me) {
     	                double dragX = me.getSceneX();
     	                double dragY = me.getSceneY();
@@ -96,6 +116,19 @@ public class gameplay extends AnchorPane implements Serializable {
                                 {
                                     System.out.println("mag");
                                     mags.get(i).destroy();
+                                }
+                            if(player.getBoundsInParent().intersects(bombs.get(i).getBoundsInParent()))
+                                {
+                                    System.out.println("mag");
+                                    bombs.get(i).destroy();
+                                    Scene scene=getScene();
+                                try { 
+                                    AnchorPane newgame=new gameplay(score.getscore(),player.getlen(),co);
+                                    newgame.setId("fpane");
+                                    scene.setRoot(newgame);
+                                } catch (FileNotFoundException ex) {
+                                    Logger.getLogger(gameplay.class.getName()).log(Level.SEVERE, null, ex);
+                                }
                                 }
                             if(player.getBoundsInParent().intersects(sh.get(i).getBoundsInParent()))
                                 {
@@ -152,12 +185,12 @@ public class gameplay extends AnchorPane implements Serializable {
                                 {
                                     boxes.get(i).destroy();
                                 }
-                                else if(c==0)
+                                else
                                 {
                                     
                                     try {
                                         stopall();
-                                        c=1;
+                                        
                                     } catch (IOException ex) {
                                         Logger.getLogger(gameplay.class.getName()).log(Level.SEVERE, null, ex);
                                     } catch (ClassNotFoundException ex) {
@@ -185,9 +218,13 @@ public class gameplay extends AnchorPane implements Serializable {
         return player;
     }
 
-    gameplay(int sc,int l) throws FileNotFoundException
+    /** Main gameplay function
+     * @param sc   score of user
+     * @param l   length of the snake at a given time*/
+    gameplay(int sc,int l,Color co) throws FileNotFoundException
     {   
-        this.player=getplayer(l);
+        this.co=co;
+        this.player=getplayer(l,co);
         this.score=new score(sc);
         Button btn1=new Button("| |");
         btn1.setStyle("-fx-font: 30 arial; -fx-base: #ee2211;");
@@ -201,7 +238,7 @@ public class gameplay extends AnchorPane implements Serializable {
             {
                
                 try {
-                    AnchorPane pause=new pausescreen(score.getscore(),player.getlen());
+                    AnchorPane pause=new pausescreen(score.getscore(),player.getlen(),co);
                     Scene scene =getScene();
                     scene.setRoot(pause);
                 } catch (FileNotFoundException ex) {
@@ -234,7 +271,7 @@ public class gameplay extends AnchorPane implements Serializable {
                     
                     this.getChildren().addAll(boxes.get(i),balls.get(i),walls.get(i));
                     System.out.println(balls.get(i).gety()/2000);
-                    boxan.add(new TranslateTransition(Duration.seconds((boxes.get(i).gety()/2000)*-12),boxes.get(i)));
+                    boxan.add(new TranslateTransition(Duration.seconds((boxes.get(i).gety()/2000)*-15),boxes.get(i)));
                     
                     boxan.get(i).setFromY(boxes.get(i).ry);
                     boxan.get(i).setToY(boxes.get(i).gety()*-1+1000);
@@ -244,7 +281,7 @@ public class gameplay extends AnchorPane implements Serializable {
                     
                     
 
-                    ballan.add(new TranslateTransition(Duration.seconds((balls.get(i).gety()/2000)*-12),balls.get(i)));
+                    ballan.add(new TranslateTransition(Duration.seconds((balls.get(i).gety()/2000)*-15),balls.get(i)));
                     ballan.get(i).setFromY(balls.get(i).ry);
                     ballan.get(i).setToY(balls.get(i).gety()*-1+1000);
                     ballan.get(i).setCycleCount(1);
@@ -252,7 +289,7 @@ public class gameplay extends AnchorPane implements Serializable {
                     //balls.get(i).destroy();
 
 
-                    wallan.add(new TranslateTransition(Duration.seconds((walls.get(i).gety()/2000)*-12),walls.get(i)));
+                    wallan.add(new TranslateTransition(Duration.seconds((walls.get(i).gety()/2000)*-15),walls.get(i)));
                     wallan.get(i).setFromY(walls.get(i).ry);
                     wallan.get(i).setToY(walls.get(i).gety()*-1+1000);
                     wallan.get(i).setCycleCount(1);
@@ -271,7 +308,7 @@ public class gameplay extends AnchorPane implements Serializable {
                 {
                     mags.add(new magnet(i));
                     this.getChildren().add(mags.get(i));
-                    mag.add(new TranslateTransition(Duration.seconds((mags.get(i).gety()/2000)*-12),mags.get(i)));
+                    mag.add(new TranslateTransition(Duration.seconds((mags.get(i).gety()/2000)*-15),mags.get(i)));
                     mag.get(i).setFromY(mags.get(i).ry);
                     mag.get(i).setToY(mags.get(i).gety()*-1+1000);
                     mag.get(i).setCycleCount(1);
@@ -280,7 +317,7 @@ public class gameplay extends AnchorPane implements Serializable {
                     
                     bombs.add(new destroyallblocks(i));
                     this.getChildren().add(bombs.get(i));
-                    bomb.add(new TranslateTransition(Duration.seconds((bombs.get(i).gety()/2000)*-12),bombs.get(i)));
+                    bomb.add(new TranslateTransition(Duration.seconds((bombs.get(i).gety()/2000)*-15),bombs.get(i)));
                     bomb.get(i).setFromY(bombs.get(i).ry);
                     bomb.get(i).setToY(bombs.get(i).gety()*-1+1000);
                     bomb.get(i).setCycleCount(1);
@@ -288,7 +325,7 @@ public class gameplay extends AnchorPane implements Serializable {
                     
                     sh.add(new shield(i));
                     this.getChildren().add(sh.get(i));
-                    sha.add(new TranslateTransition(Duration.seconds((sh.get(i).gety()/2000)*-12),sh.get(i)));
+                    sha.add(new TranslateTransition(Duration.seconds((sh.get(i).gety()/2000)*-15),sh.get(i)));
                     sha.get(i).setFromY(sh.get(i).ry);
                     sha.get(i).setToY(sh.get(i).gety()*-1+1000);
                     sha.get(i).setCycleCount(1);

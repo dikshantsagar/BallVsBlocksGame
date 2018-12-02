@@ -12,24 +12,40 @@ import javafx.scene.shape.Circle;
 
 /**
  *
- * @author dikshant
+ *@author dikshant sagar, mukul kumar
+ * @version Snake Vs Block Game AP Project
+ * 
+ * Parent Component class for GUI components like Ball, Block, etc 
+ * 
  */
 public class Component extends StackPane implements Serializable
 {
+	
+	/** ry and rx gives the coordinated of the component*/
+	  
     protected double ry;
     protected double rx;
     
+    /** Get the y component of componen
+     * @return t*/
     protected double gety()
     {
         return this.ry;
     }
+    
+    /** Get the y component of componen
+     * @return t*/
     protected double getx()
     {
         return this.rx;
     }
     
+    /**Main destroy function for all GUI components
+	 * 
+	 */
     protected void destroy()
     {
+    	
         
         this.setScaleX(0);
         this.setScaleY(0);

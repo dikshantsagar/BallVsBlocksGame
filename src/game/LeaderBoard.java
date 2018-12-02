@@ -23,10 +23,16 @@ import javafx.scene.text.Text;
 
 /**
  *
- * @author dikshant
+  *@author dikshant sagar, mukul kumar
+ * @version Snake Vs Block Game AP Project
+ * 
+ * LeaderBoard class
+ * LeaderBoard page contains the details of the top scorers of the game.
+ * The names are in a arrayList. 
  */
 public class LeaderBoard extends AnchorPane implements Serializable
 {
+	/** Creates leaderboard and put top 10 high scores in the arraylist and show them in a table*/
     LeaderBoard() throws FileNotFoundException, IOException, ClassNotFoundException
     {
         Button head=new Button("Leader Board");
@@ -58,6 +64,9 @@ public class LeaderBoard extends AnchorPane implements Serializable
         Button b=new Button("<");
         b.setStyle("-fx-font: 30 arial; -fx-base: #ee2211;");
         this.getChildren().add(b);
+        
+        /** Mosue event handler 
+         * @param mouseevent  takes in mouse_clicked event and handles it */
         
         b.addEventHandler(MouseEvent.MOUSE_CLICKED,new EventHandler<MouseEvent>()
         {

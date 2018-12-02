@@ -35,14 +35,22 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author dikshant
+  *@author dikshant sagar, mukul kumar
+ * @version Snake Vs Block Game AP Project
+ * 
+ * gameover class
+ * Shows on the screen when the game is over.
+ * Contains functions which Handles mouse event
  */
 public class gameover extends AnchorPane{
+	
+	/** Gameover function which shows the window when the game is over. */
+    protected Color co;
     
+    gameover(int sc,Color co) throws FileNotFoundException, IOException, ClassNotFoundException{
     
-    gameover(int sc) throws FileNotFoundException, IOException, ClassNotFoundException{
-    
-    Image image = new Image(new FileInputStream("./src/game/logo.png"));
+        this.co=co;
+        Image image = new Image(new FileInputStream("./src/game/logo.png"));
         ImageView imageView = new ImageView(image);
         imageView.setLayoutX(170);
         imageView.setLayoutY(20);
@@ -80,7 +88,8 @@ public class gameover extends AnchorPane{
         
         System.out.println(t);
         
-        
+        /** Mosue event handler 
+         * @param mouseevent  takes in mouse_clicked event and hhandles it */
         
          btn1.addEventHandler(MouseEvent.MOUSE_CLICKED,new EventHandler<MouseEvent>()
         {
@@ -91,7 +100,7 @@ public class gameover extends AnchorPane{
                 try 
                 {
                     
-                    AnchorPane newgame=new gameplay(0,4);
+                    AnchorPane newgame=new gameplay(0,4,co);
                     newgame.setId("fpane");
                     Scene scene =getScene();
                     scene.setRoot(newgame);
@@ -102,6 +111,9 @@ public class gameover extends AnchorPane{
                 
             }
         });
+         /** Mosue event handler 
+          * @param mouseevent  takes in mouse_clicked event and hhandles it */
+         
          
           btn2.addEventHandler(MouseEvent.MOUSE_CLICKED,new EventHandler<MouseEvent>()
         {
