@@ -22,10 +22,16 @@ import javafx.scene.text.Text;
 
 /**
  *
- * @author dikshant
+  *@author dikshant sagar, mukul kumar
+ * @version Snake Vs Block Game AP Project
+ * 
+ * Home Class
+ * The homepage/start page of the game.
  */
 public class Home extends AnchorPane
+
 {
+	/** Create home page*/
     Home() throws FileNotFoundException
     {
         Text h=new Text("Snake V/s Blocks");
@@ -59,6 +65,8 @@ public class Home extends AnchorPane
         
         btn1.addEventHandler(MouseEvent.MOUSE_CLICKED,new EventHandler<MouseEvent>()
         {
+        	/** event handles
+        	 * @param e    mouse event e */
             @Override
             public void handle(MouseEvent e)
             {
@@ -77,6 +85,8 @@ public class Home extends AnchorPane
             }
         });
         
+        /** event handles
+    	 * @param e    mouse event e */
          btn2.addEventHandler(MouseEvent.MOUSE_CLICKED,new EventHandler<MouseEvent>()
         {
             @Override

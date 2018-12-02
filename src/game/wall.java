@@ -12,10 +12,17 @@ import javafx.scene.shape.Rectangle;
 
 /**
  *
- * @author dikshant
+  *@author dikshant sagar, mukul kumar
+ * @version Snake Vs Block Game AP Project
+ * wall class
+ * blocks the horizontal movement of the snake.
+ * 
  */
 public class wall extends Component implements Serializable
 {
+	
+	/**  Creates a wall at random 
+	 * @param c  parameter to geneerate wall at random position on the screen*/
     wall(int c)
     {
         Random rand=new Random();

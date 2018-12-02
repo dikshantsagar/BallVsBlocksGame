@@ -40,10 +40,22 @@ import javafx.util.Duration;
 
 /**
  *
- * @author dikshant
+  *@author dikshant sagar, mukul kumar
+ * @version Snake Vs Block Game AP Project
+ * 
+ * gameplay class
+ * The main gameplay where all the activities occur.
+ * The game will run on this class. This class embeds all the GUI components and the score and the pause exit menu.
  */
 public class gameplay extends AnchorPane implements Serializable {
     
+	/** arraylist of boxes
+	 * arraylist of balls
+	 * arraylist of wall
+	 * arraylist of magnet
+	 * arraylist of destroyblock
+	 * arraylist of shield
+	 * */
     
     private double initX;
     private Snake player;
@@ -63,6 +75,8 @@ public class gameplay extends AnchorPane implements Serializable {
             ArrayList<TranslateTransition> sha = new ArrayList<TranslateTransition>();
    
     int c=0;
+    
+    /** Gameover function*/
     public void stopall() throws IOException, FileNotFoundException, ClassNotFoundException
     {
        
@@ -73,7 +87,7 @@ public class gameplay extends AnchorPane implements Serializable {
         scene.setFill(RED);
         
     }
-
+/**  get the playyer's infomation*/
     
     private Snake getplayer(int l)
     {
@@ -185,6 +199,9 @@ public class gameplay extends AnchorPane implements Serializable {
         return player;
     }
 
+    /** Main gameplay function
+     * @param sc   score of user
+     * @param l   length of the snake at a given time*/
     gameplay(int sc,int l) throws FileNotFoundException
     {   
         this.player=getplayer(l);

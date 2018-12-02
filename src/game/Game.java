@@ -33,11 +33,18 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author dikshant
+  *@author dikshant sagar, mukul kumar
+ * @version Snake Vs Block Game AP Project
+ * 
+ * Main Game class
  */
 public class Game extends Application implements Serializable{
     
+	/** Scene contains the GUI components*/
     public Scene scene;
+    
+    /** Starts the stage and GUI application
+     * @param Stage creates a stage element and starts the screen  */
     
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException {

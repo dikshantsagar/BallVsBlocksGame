@@ -16,11 +16,16 @@ import javafx.scene.shape.Circle;
 
 /**
  *
- * @author dikshant
+  *@author dikshant sagar, mukul kumar
+ * @version Snake Vs Block Game AP Project
+ * shield class
+ * When a snake captures it. It can't get eliminated by the blocks.
  */
 public class shield extends Component implements Serializable
 {
     
+	/** Shield constructor
+	 * @param i   interger to generate shield at random places on the screen */
     shield(int i) throws FileNotFoundException
     {
          Random rand=new Random();

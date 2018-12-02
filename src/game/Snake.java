@@ -19,28 +19,38 @@ import javafx.scene.text.Text;
 
 /**
  *
- * @author dikshant
+  *@author dikshant sagar, mukul kumar
+ * @version Snake Vs Block Game AP Project
+ * Snake class
+ * Snake adds balls to it and its length increases.
  */
 public class Snake extends Group implements Serializable
 {
+	/** Gives length, position coordinates of snake and the status of shield*/
     private int len;
     private double sx=300;
     private double sy=500;
     private double ey;
     boolean shield=false;
+    
+    /** making shield active*/
     boolean shieldalive()
     {
         return shield;
     }
+    /** set shield on the screen */
     void setshield()
     {
         this.shield=true;
     }
+    
+    /** remove shield from the screen*/
     void removeshield()
     {
         this.shield=false;
     }
-    
+   /** Add balls to snake
+    * @param x   value of ball*/
     public void addlen(int x)
     {
         
@@ -57,6 +67,8 @@ public class Snake extends Group implements Serializable
         }
     }
     
+    /** decrease the length of the snake according to the the value of block
+     * @param x      value of the block */
     public void declen(int x)
     {
         if(this.len-x>1)
@@ -75,10 +87,16 @@ public class Snake extends Group implements Serializable
         }
         
     }
+    
+    /** function to get the length of snake*/
+    
     public int getlen()
     {
         return this.len;
     }
+    
+    /** Snake contructor
+     * @param le        initial length of the snake*/
     Snake(int le)
     {   
         this.len=le;

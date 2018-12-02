@@ -21,12 +21,21 @@ import javafx.scene.text.Text;
 
 /**
  *
- * @author dikshant
+  *@author dikshant sagar, mukul kumar
+ * @version Snake Vs Block Game AP Project
+ * pausescreen class.
+ * Will be in action when the pause button will be pressed.
+ * Will give option to resume button.
  */
 public class pausescreen extends AnchorPane
 {
+	/** Score and length of snake is recorded and stored*/
     int score;
     int len;
+    
+    /** Pause the screen
+     * @param sc     score of user 
+     * @param l      length of snake */
     pausescreen(int sc,int l) throws FileNotFoundException
     {
         this.score=sc;
@@ -54,6 +63,9 @@ public class pausescreen extends AnchorPane
         this.getChildren().addAll(imageView,h,btn1,btn2);
         this.setId("pane");
         
+        /** Mosue event handler 
+         * @param mouseevent  takes in mouse_clicked event and hhandles it */
+        
         btn1.addEventHandler(MouseEvent.MOUSE_CLICKED,new EventHandler<MouseEvent>()
         {
             @Override
@@ -72,6 +84,9 @@ public class pausescreen extends AnchorPane
                 
             }
         });
+        /** Mosue event handler 
+         * @param mouseevent  takes in mouse_clicked event and hhandles it */
+        
         
          btn2.addEventHandler(MouseEvent.MOUSE_CLICKED,new EventHandler<MouseEvent>()
         {

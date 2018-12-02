@@ -16,7 +16,8 @@ import javafx.scene.layout.StackPane;
 
 /**
  *
- * @author dikshant
+  *@author dikshant sagar, mukul kumar
+ * @version Snake Vs Block Game AP Project
  */
 public class test extends StackPane
 {

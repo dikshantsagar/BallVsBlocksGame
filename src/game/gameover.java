@@ -35,9 +35,16 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author dikshant
+  *@author dikshant sagar, mukul kumar
+ * @version Snake Vs Block Game AP Project
+ * 
+ * gameover class
+ * Shows on the screen when the game is over.
+ * Contains functions which Handles mouse event
  */
 public class gameover extends AnchorPane{
+	
+	/** Gameover function which shows the window when the game is over. */
     
     
     gameover(int sc) throws FileNotFoundException, IOException, ClassNotFoundException{
@@ -80,7 +87,8 @@ public class gameover extends AnchorPane{
         
         System.out.println(t);
         
-        
+        /** Mosue event handler 
+         * @param mouseevent  takes in mouse_clicked event and hhandles it */
         
          btn1.addEventHandler(MouseEvent.MOUSE_CLICKED,new EventHandler<MouseEvent>()
         {
@@ -102,6 +110,9 @@ public class gameover extends AnchorPane{
                 
             }
         });
+         /** Mosue event handler 
+          * @param mouseevent  takes in mouse_clicked event and hhandles it */
+         
          
           btn2.addEventHandler(MouseEvent.MOUSE_CLICKED,new EventHandler<MouseEvent>()
         {

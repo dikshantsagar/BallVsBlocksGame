@@ -16,9 +16,18 @@ import javafx.scene.shape.Circle;
 
 /**
  *
- * @author dikshant
+ *@author dikshant sagar, mukul kumar
+ * @version Snake Vs Block Game AP Project
+ * destroyallblocks class. 
+ * Destroys all the blocks present on the screen at a given time.
  */
 public class destroyallblocks extends Component implements Serializable
+
+
+/**
+ *  Destroys all blocks
+ *  @param  i       i is a dummy ineteger to decide the position and after how much time a destroyblock component will occur
+ */
 {
     destroyallblocks(int i) throws FileNotFoundException
     {
