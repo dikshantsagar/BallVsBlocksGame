@@ -76,6 +76,7 @@ public class gameplay extends AnchorPane implements Serializable {
     protected   ArrayList<TranslateTransition> bomb = new ArrayList<TranslateTransition>();
     protected   ArrayList<TranslateTransition> sha = new ArrayList<TranslateTransition>();
    
+<<<<<<< HEAD
     
     
     /** Gameover function
@@ -83,6 +84,12 @@ public class gameplay extends AnchorPane implements Serializable {
      * @throws java.io.FileNotFoundException
      * @throws java.lang.ClassNotFoundException*/
     protected void stopall() throws IOException, FileNotFoundException, ClassNotFoundException
+=======
+    int c=0;
+    
+    /** Gameover function*/
+    public void stopall() throws IOException, FileNotFoundException, ClassNotFoundException
+>>>>>>> ff52a881dadf2717db4578383938414fc9172487
     {
        
         gameover root=new gameover(this.score.getscore(),co);
@@ -221,7 +228,11 @@ public class gameplay extends AnchorPane implements Serializable {
     /** Main gameplay function
      * @param sc   score of user
      * @param l   length of the snake at a given time*/
+<<<<<<< HEAD
     gameplay(int sc,int l,Color co) throws FileNotFoundException
+=======
+    gameplay(int sc,int l) throws FileNotFoundException
+>>>>>>> ff52a881dadf2717db4578383938414fc9172487
     {   
         this.co=co;
         this.player=getplayer(l,co);

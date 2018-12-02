@@ -32,27 +32,45 @@ public class Snake extends Group implements Serializable
     private double sy=500;
     private double ey;
     boolean shield=false;
+<<<<<<< HEAD
     protected Color co;
     
     /** making shield active*/
     protected boolean shieldalive()
+=======
+    
+    /** making shield active*/
+    boolean shieldalive()
+>>>>>>> ff52a881dadf2717db4578383938414fc9172487
     {
         return shield;
     }
     /** set shield on the screen */
+<<<<<<< HEAD
     protected void setshield()
+=======
+    void setshield()
+>>>>>>> ff52a881dadf2717db4578383938414fc9172487
     {
         this.shield=true;
     }
     
     /** remove shield from the screen*/
+<<<<<<< HEAD
     protected void removeshield()
+=======
+    void removeshield()
+>>>>>>> ff52a881dadf2717db4578383938414fc9172487
     {
         this.shield=false;
     }
    /** Add balls to snake
     * @param x   value of ball*/
+<<<<<<< HEAD
     protected void addlen(int x)
+=======
+    public void addlen(int x)
+>>>>>>> ff52a881dadf2717db4578383938414fc9172487
     {
         
         this.len+=x;
@@ -70,7 +88,11 @@ public class Snake extends Group implements Serializable
     
     /** decrease the length of the snake according to the the value of block
      * @param x      value of the block */
+<<<<<<< HEAD
     protected void declen(int x)
+=======
+    public void declen(int x)
+>>>>>>> ff52a881dadf2717db4578383938414fc9172487
     {
         if(this.len-x>1)
         {
@@ -89,17 +111,27 @@ public class Snake extends Group implements Serializable
         
     }
     
+<<<<<<< HEAD
     /** function to get the length of snak
      * @return e*/
     
     protected int getlen()
+=======
+    /** function to get the length of snake*/
+    
+    public int getlen()
+>>>>>>> ff52a881dadf2717db4578383938414fc9172487
     {
         return this.len;
     }
     
     /** Snake contructor
      * @param le        initial length of the snake*/
+<<<<<<< HEAD
     Snake(int le,Color co)
+=======
+    Snake(int le)
+>>>>>>> ff52a881dadf2717db4578383938414fc9172487
     {   
         this.co=co;
         this.len=le;

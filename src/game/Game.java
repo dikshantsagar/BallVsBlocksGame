@@ -41,9 +41,16 @@ import javafx.stage.Stage;
 public class Game extends Application implements Serializable{
     
 	/** Scene contains the GUI components*/
+<<<<<<< HEAD
     protected Scene scene;
     
     /** Starts the stage and GUI application  */
+=======
+    public Scene scene;
+>>>>>>> ff52a881dadf2717db4578383938414fc9172487
+    
+    /** Starts the stage and GUI application
+     * @param Stage creates a stage element and starts the screen  */
     
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException {

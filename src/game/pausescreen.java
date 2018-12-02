@@ -31,14 +31,23 @@ import javafx.scene.text.Text;
 public class pausescreen extends AnchorPane
 {
 	/** Score and length of snake is recorded and stored*/
+<<<<<<< HEAD
     protected int score;
     protected int len;
     protected Color co;
+=======
+    int score;
+    int len;
+>>>>>>> ff52a881dadf2717db4578383938414fc9172487
     
     /** Pause the screen
      * @param sc     score of user 
      * @param l      length of snake */
+<<<<<<< HEAD
     pausescreen(int sc,int l,Color co) throws FileNotFoundException
+=======
+    pausescreen(int sc,int l) throws FileNotFoundException
+>>>>>>> ff52a881dadf2717db4578383938414fc9172487
     {
         this.co=co;
         this.score=sc;

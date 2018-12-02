@@ -21,7 +21,11 @@ import javafx.scene.text.Text;
  * 
  * Box class
  * The snake will encounter blocks of different values and destroy them
+<<<<<<< HEAD
  * if it has enough length (length less than value)
+=======
+ * if it has enough length (length>=value)
+>>>>>>> ff52a881dadf2717db4578383938414fc9172487
  */
 public class box extends Component implements Serializable
 {
@@ -33,6 +37,7 @@ public class box extends Component implements Serializable
     
     protected int blocknum;
     protected Rectangle b;
+<<<<<<< HEAD
     protected Text t;
 
 	/**
@@ -40,6 +45,14 @@ public class box extends Component implements Serializable
      * @return 
 	 */
     protected int getnum()
+=======
+    
+
+	/**
+	 * get the block number
+	 */
+    public int getnum()
+>>>>>>> ff52a881dadf2717db4578383938414fc9172487
     {
         return this.blocknum;
     }

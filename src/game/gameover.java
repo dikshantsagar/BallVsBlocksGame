@@ -45,7 +45,10 @@ import javafx.stage.Stage;
 public class gameover extends AnchorPane{
 	
 	/** Gameover function which shows the window when the game is over. */
+<<<<<<< HEAD
     protected Color co;
+=======
+>>>>>>> ff52a881dadf2717db4578383938414fc9172487
     
     gameover(int sc,Color co) throws FileNotFoundException, IOException, ClassNotFoundException{
     

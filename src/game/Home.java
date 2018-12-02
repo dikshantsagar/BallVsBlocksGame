@@ -34,8 +34,12 @@ import javafx.scene.text.Text;
  */
 public class Home extends AnchorPane
 
+<<<<<<< HEAD
 {   
     protected Color co;
+=======
+{
+>>>>>>> ff52a881dadf2717db4578383938414fc9172487
 	/** Create home page*/
     Home() throws FileNotFoundException
     {

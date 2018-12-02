@@ -20,7 +20,11 @@ public class wall extends Component implements Serializable
 {
 	
 	/**  Creates a wall at random 
+<<<<<<< HEAD
 	 * @param c  parameter to generate wall at random position on the screen*/
+=======
+	 * @param c  parameter to geneerate wall at random position on the screen*/
+>>>>>>> ff52a881dadf2717db4578383938414fc9172487
     wall(int c)
     {
         Random rand=new Random();

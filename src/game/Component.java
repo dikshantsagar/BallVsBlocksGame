@@ -26,15 +26,23 @@ public class Component extends StackPane implements Serializable
     protected double ry;
     protected double rx;
     
+<<<<<<< HEAD
     /** Get the y component of componen
      * @return t*/
+=======
+    /** Get the y component of component*/
+>>>>>>> ff52a881dadf2717db4578383938414fc9172487
     protected double gety()
     {
         return this.ry;
     }
     
+<<<<<<< HEAD
     /** Get the y component of componen
      * @return t*/
+=======
+    /** Get the y component of component*/
+>>>>>>> ff52a881dadf2717db4578383938414fc9172487
     protected double getx()
     {
         return this.rx;

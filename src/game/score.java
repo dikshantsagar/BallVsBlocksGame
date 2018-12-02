@@ -19,20 +19,34 @@ import javafx.scene.text.Text;
  */
 public class score extends Text implements Serializable{
 	/** score counter : keeps the score of the player*/
+<<<<<<< HEAD
     protected int score;
     
     /** SEts the score of the user
      * @param x    adds the score x to be added to the score of user*/
     protected void setscore(int x)
+=======
+    int score;
+    
+    /** SEts the score of the user
+     * @param x    adds the score x to be added to the score of user*/
+    public void setscore(int x)
+>>>>>>> ff52a881dadf2717db4578383938414fc9172487
     {
         this.score+=x;
         this.setText(Integer.toString(score));
     }
     
+<<<<<<< HEAD
     /** get the score of use
      * @return r*/
     
     protected int getscore()
+=======
+    /** get the score of user*/
+    
+    public int getscore()
+>>>>>>> ff52a881dadf2717db4578383938414fc9172487
     {
         return this.score;
     }
